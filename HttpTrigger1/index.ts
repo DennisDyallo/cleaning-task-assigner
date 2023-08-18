@@ -70,76 +70,13 @@ function formatAssignmentsToHTML(assignments: TaskAssignments): string {
             breakString = `<li><strong>${person} gets a break this week! ${emojiHappy}</strong></li>`;
         }
     }
-
+    
     return `
         <html>
             <head>
                 <title>Cleaning Schedule</title>
                 <style>
-                @keyframes slideFadeIn {
-                    from {
-                        opacity: 0;
-                        transform: translateX(-50px);
-                    }
-                    to {
-                        opacity: 1;
-                        transform: translateX(0);
-                    }
-                }
-                
-                @keyframes pulsate {
-                    0% {
-                        font-size: 100%;
-                    }
-                    50% {
-                        font-size: 110%;  // Increase font size by 10%
-                    }
-                    100% {
-                        font-size: 100%;
-                    }
-                }
-                
-                body {
-                    font-family: Arial, sans-serif;
-                    height: 100vh;
-                    margin: 0;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    background-color: #f4f4f4;
-                }
-                
-                ul {
-                    list-style-type: none;
-                    padding-left: 0;
-                    background-color: #fff;
-                    padding: 20px;
-                    border-radius: 8px;
-                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-                    width: 400px;
-                    height: 165px;
-                    line-height: 20px;
-                }
-                
-                li {
-                    animation: slideFadeIn 1s ease-out forwards;
-                    margin-bottom: 10px;
-                    opacity: 0;  // Start as transparent
-                }
-                
-                li:nth-child(2) {
-                    line-height: 25px;
-                    animation: slideFadeIn 1.5s ease-out forwards, pulsate 2s infinite ease-in-out;
-                    animation-delay: 1.5s, 0s;  // Separate delay for each animation
-                }
-                
-                li:nth-child(3) {
-                    animation-delay: 1s;  // Shortest delay
-                }
-                
-                li:nth-child(4) {
-                    animation-delay: 0.5s;    // Middle delay
-                }
+                    ${Styles}
                 </style>
             </head>
             <body>
@@ -152,6 +89,71 @@ function formatAssignmentsToHTML(assignments: TaskAssignments): string {
         </html>
     `;
 }
+
+const Styles = `@keyframes slideFadeIn {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes pulsate {
+    0% {
+        font-size: 100%;
+    }
+    50% {
+        font-size: 110%;  // Increase font size by 10%
+    }
+    100% {
+        font-size: 100%;
+    }
+}
+
+body {
+    font-family: Arial, sans-serif;
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f4f4f4;
+}
+
+ul {
+    list-style-type: none;
+    padding-left: 0;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    height: 165px;
+    line-height: 20px;
+}
+
+li {
+    animation: slideFadeIn 1s ease-out forwards;
+    margin-bottom: 10px;
+    opacity: 0;  // Start as transparent
+}
+
+li:nth-child(2) {
+    line-height: 25px;
+    animation: slideFadeIn 1.5s ease-out forwards, pulsate 2s infinite ease-in-out;
+    animation-delay: 1.5s, 0s;  // Separate delay for each animation
+}
+
+li:nth-child(3) {
+    animation-delay: 1s;  // Shortest delay
+}
+
+li:nth-child(4) {
+    animation-delay: 0.5s;    // Middle delay
+}`
 
 
 export default httpTrigger;
