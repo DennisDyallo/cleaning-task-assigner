@@ -57,8 +57,8 @@ function formatAssignmentsToHTML(assignments: TaskAssignments): string {
     let breakString: string = "";
     let taskStrings: string[] = [];
 
-    let happyEmojis = ['😁','😍','🥰','🤗']
-    let sadEmojis = ['😓','😮','😪','😥']
+    const happyEmojis = ['😁','😍','🥰','🤗']
+    const sadEmojis = ['😓','😮','😪','😥']
 
     for (let person in assignments) {
         let emojiHappy= happyEmojis[getRandomInt(happyEmojis.length)]
