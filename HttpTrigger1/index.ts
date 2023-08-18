@@ -72,54 +72,68 @@ function formatAssignmentsToHTML(assignments: TaskAssignments): string {
     }
 
     return `
-    <html>
-        <head>
-            <title>Cleaning Schedule</title>
-            <style>
-                @keyframes slideFadeIn {
-                    from {
-                        opacity: 0;
-                        transform: translateX(-50px);
+        <html>
+            <head>
+                <title>Cleaning Schedule</title>
+                <style>
+                    @keyframes slideFadeIn {
+                        from {
+                            opacity: 0;
+                            transform: translateX(-50px);
+                        }
+                        to {
+                            opacity: 1;
+                            transform: translateX(0);
+                        }
                     }
-                    to {
-                        opacity: 1;
-                        transform: translateX(0);
+
+                    body {
+                        font-family: Arial, sans-serif;
+                        height: 100vh;
+                        margin: 0;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        background-color: #f4f4f4;
                     }
-                }
 
-                ul {
-                    list-style-type: none;
-                    padding-left: 0;
-                }
+                    ul {
+                        list-style-type: none;
+                        padding-left: 0;
+                        background-color: #fff;
+                        padding: 20px;
+                        border-radius: 8px;
+                        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                    }
 
-                li {
-                    animation: slideFadeIn 1s ease-out forwards;
-                    margin-bottom: 10px;
-                    opacity: 0;  // Start as transparent
-                }
+                    li {
+                        animation: slideFadeIn 1s ease-out forwards;
+                        margin-bottom: 10px;
+                        opacity: 0;  // Start as transparent
+                    }
 
-                li:nth-child(1) {
-                    animation-delay: 0.5s;  // Stagger the animations
-                }
+                    li:nth-child(1) {
+                        animation-delay: 1.5s;  // Stagger the animations
+                    }
 
-                li:nth-child(2) {
-                    animation-delay: 1s;
-                }
+                    li:nth-child(2) {
+                        animation-delay: 1s;
+                    }
 
-                li:nth-child(3) {
-                    animation-delay: 1.5s;
-                }
-            </style>
-        </head>
-        <body>
-            <h2>Weekly Cleaning Assignments</h2>
-            <ul>
-                ${breakString}
-                ${taskStrings.join('')}
-            </ul>
-        </body>
-    </html>
-`;;
+                    li:nth-child(3) {
+                        animation-delay: 0.5s;
+                    }
+                </style>
+            </head>
+            <body>
+                <ul>
+                    <h2>Weekly Cleaning Assignments</h2>
+                    ${breakString}
+                    ${taskStrings.join('')}
+                </ul>
+            </body>
+        </html>
+    `;
 }
 
 
