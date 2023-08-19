@@ -98,79 +98,81 @@ function getWeekNumber(d: Date): number {
 }
 
 
-const Styles = `@keyframes slideFadeIn {
-    from {
-        opacity: 0;
-        transform: translateX(-50px);
+const Styles = `
+    @keyframes slideFadeIn {
+        from {
+            opacity: 0;
+            transform: translateX(-50px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
     }
-    to {
-        opacity: 1;
-        transform: translateX(0);
+
+    @keyframes pulsate {
+        0% {
+            font-size: 100%;
+        }
+        50% {
+            font-size: 110%;  // Increase font size by 10%
+        }
+        100% {
+            font-size: 100%;
+        }
     }
-}
 
-@keyframes pulsate {
-    0% {
-        font-size: 100%;
+    body {
+        font-family: Arial, sans-serif;
+        height: 100vh;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #f4f4f4;
     }
-    50% {
-        font-size: 110%;  // Increase font size by 10%
+
+    ul {
+        list-style-type: none;
+        padding-left: 0;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: 400px;
+        height: 190px;
     }
-    100% {
-        font-size: 100%;
+
+    li {
+        animation: slideFadeIn 1s ease-out forwards;
+        margin-bottom: 10px;
+        opacity: 0;  // Start as transparent
     }
-}
 
-body {
-    font-family: Arial, sans-serif;
-    height: 100vh;
-    margin: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #f4f4f4;
-}
+    li:nth-child(1) {
+        animation: none;
+        opacity: 100;
+    }
 
-ul {
-    list-style-type: none;
-    padding-left: 0;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 400px;
-    height: 190px;
-}
+    li:nth-child(2) {
+        animation: slideFadeIn 1.5s ease-out forwards, pulsate 2s infinite ease-in-out;
+        animation-delay: 1.5s, 0s;  
+        height:30px;
+    }
 
-li {
-    animation: slideFadeIn 1s ease-out forwards;
-    margin-bottom: 10px;
-    opacity: 0;  // Start as transparent
-}
+    li:nth-child(3) {
+        animation-delay: 1s;  // Shortest delay
+    }
 
-li:nth-child(1) {
-    animation: none;
-    opacity: 100;
-}
+    li:nth-child(4) {
+        animation-delay: 0.5s;    // Middle delay
+    }
 
-li:nth-child(2) {
-    animation: slideFadeIn 1.5s ease-out forwards, pulsate 2s infinite ease-in-out;
-    animation-delay: 1.5s, 0s;  
-    height:30px;
-}
-
-li:nth-child(3) {
-    animation-delay: 1s;  // Shortest delay
-}
-
-li:nth-child(4) {
-    animation-delay: 0.5s;    // Middle delay
-}
-
-.right-align {
-    text-align: right;
-    font-size: 10px;
-    margin-bottom:0
-}
-
+    .right-align {
+        text-align: right;
+        font-size: 10px;
+        margin-bottom:0;
+        opacity: 100;
+        animation: none !important
+    }
 `
