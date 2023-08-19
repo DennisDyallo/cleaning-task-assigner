@@ -5,8 +5,6 @@ interface TaskAssignments {
     [Person: string]: Task[];
 }
 
-
-
 function getRandomInt(max: number): number {
     return Math.floor(Math.random() * max);
 }
@@ -56,6 +54,10 @@ export function formatAssignmentsToHTML(assignments: TaskAssignments): string {
 
     const happyEmojis = ['😁','😍','🥰','🤗']
     const sadEmojis = ['😓','😮','😪','😥']
+    
+    const today = new Date();
+    const formattedDate = `${String(today.getDate())} / ${String(today.getMonth() + 1)}`;
+    const weekNumber = getWeekNumber(today);
 
     for (let person in assignments) {
         let emojiHappy= happyEmojis[getRandomInt(happyEmojis.length)]
@@ -81,11 +83,20 @@ export function formatAssignmentsToHTML(assignments: TaskAssignments): string {
                     <h2>Weekly Cleaning Assignments</h2>
                     ${breakString}
                     ${taskStrings.join('')}
+                    <li class="right-align">${formattedDate} (v${weekNumber})</li>
                 </ul>
             </body>
         </html>
     `;
 }
+
+function getWeekNumber(d: Date): number {
+    const date = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+    date.setUTCDate(date.getUTCDate() + 4 - (date.getUTCDay() || 7));
+    const yearStart = new Date(Date.UTC(date.getUTCFullYear(), 0, 1));
+    return Math.ceil((((date.valueOf() - yearStart.valueOf()) / 86400000) + 1) / 7);
+}
+
 
 const Styles = `@keyframes slideFadeIn {
     from {
@@ -128,8 +139,7 @@ ul {
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     width: 400px;
-    height: 165px;
-    line-height: 20px;
+    height: 190px;
 }
 
 li {
@@ -138,10 +148,15 @@ li {
     opacity: 0;  // Start as transparent
 }
 
+li:nth-child(1) {
+    animation: none;
+    opacity: 100;
+}
+
 li:nth-child(2) {
-    line-height: 25px;
     animation: slideFadeIn 1.5s ease-out forwards, pulsate 2s infinite ease-in-out;
-    animation-delay: 1.5s, 0s;  // Separate delay for each animation
+    animation-delay: 1.5s, 0s;  
+    height:30px;
 }
 
 li:nth-child(3) {
@@ -150,4 +165,12 @@ li:nth-child(3) {
 
 li:nth-child(4) {
     animation-delay: 0.5s;    // Middle delay
-}`
+}
+
+.right-align {
+    text-align: right;
+    font-size: 10px;
+    margin-bottom:0
+}
+
+`
